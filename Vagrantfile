@@ -68,38 +68,14 @@ config.vm.synced_folder ".", "/vagrant", :extra => "dmode=755,fmode=755"
   # #               Managed by Puppet.\n"
   # # }
   #
-#  config.vm.provision :puppet do |puppet|
-#    puppet.manifests_path = "puppet/manifests"
-#    puppet.manifest_file  = "site.pp"
-#    puppet.module_path    = "puppet/modules"
-#  end
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "site.pp"
+    puppet.module_path    = "puppet/modules"
+  end
 #config.vm.provision :shell do |shell|
 #shell.inline = 'cd /vagrant/ && ./create-db.sh'
 #end
-#config.vm.provision :shell do |shell|
-#shell.inline = 'cd /vagrant/ && mvn generate-resources -P setupdatabase'
-#end
-#
-#config.vm.provision :shell do |shell|
-#shell.inline = 'cd /vagrant/packaging/ && ./debian-build.sh'
-#end
-#config.vm.provision :shell do |shell|
-#shell.inline = 'if [ -e /vagrant/packaging/target/openmrs-.deb ]; then sudo dpkg -i /vagrant/packaging/target/openmrs-.deb; fi'
-#end
-#config.vm.provision :puppet do |puppet|
-#puppet.manifests_path = "puppet/manifests"
-#puppet.manifest_file  = "site.pp"
-#puppet.module_path    = "puppet/modules"
-#puppet.options        = "-e 'include refapp'"
-#end
-config.vm.provision :shell do |shell|
-shell.inline = 'sudo cp /vagrant/sources.list /etc/apt/'
-end
-
-config.vm.provision :shell do |shell|
-shell.inline = 'sudo apt-get update && sudo apt-get install -y apache2'
-end
-#
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
