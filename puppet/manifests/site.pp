@@ -1,1 +1,1 @@
-include mysql, drupal6, apache2
+include mysql, drupal6, apache2, carp_content
