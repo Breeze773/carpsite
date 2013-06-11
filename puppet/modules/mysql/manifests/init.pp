@@ -20,6 +20,6 @@ $mysqlPassword = '$(cat /vagrant/password.txt)'
   }
   exec {"setmysqlpassword":
     command => "/usr/bin/mysqladmin -u root PASSWORD ${mysqlPassword}; /bin/true",
-    require => [Package["mysql-server"], Package["mysql-client"] , Service["mysql"]]
+    require => [Package["mysql-server", "mysql-client"], Service["mysql"]]
   }
 }
