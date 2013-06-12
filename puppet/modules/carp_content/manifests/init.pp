@@ -18,7 +18,7 @@ $sqlDump = "carp_website_backup-may-21-2013.sql.gz"
   exec { "untarModules":
     command => "/bin/tar --strip-components=1 -C /usr/share/drupal6/ -xzvf /tmp/${tarball}",
     cwd     => "/tmp",
-    require => File[ "/tmp/${tarball}" ]
+    require => [File[ "/tmp/${tarball}" ], Class[ "drupal6" ]]
   }
   exec { "recreate db":
     command => "/tmp/create-db.sh",
