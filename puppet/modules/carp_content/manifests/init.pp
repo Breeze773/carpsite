@@ -1,13 +1,24 @@
 class carp_content inherits mysql {
-
+$tarball = "carpSite05-22-13.tgz"
+$sqlDump = "carp_website_backup-may-21-2013.sql.gz"
   exec {"import data":
-    command => "/bin/gunzip < /tmp/carp_website_backup-may-21-2013.sql.gz | /usr/bin/mysql -u root -p${mysqlPassword} drupal6",
-    require => [Class[ "mysql" ], File[ "/tmp/carp_website_backup-may-21-2013.sql.gz" ]]
+    command => "/bin/gunzip < /tmp/${sqlDump} | /usr/bin/mysql -u root -p${mysqlPassword} drupal6",
+    require => [Class[ "mysql" ], File[ "/tmp/${sqlDump}" ]]
   }
-  file { "/tmp/carp_website_backup-may-21-2013.sql.gz":
-    ensure  => present,
+  file { "/tmp/${sqlDump}":
+    ensure  => file,
     mode    => 644,
-    source  => "puppet:///modules/carp_content/tmp/carp_website_backup-may-21-2013.sql.gz",
+    source  => "puppet:///modules/carp_content/tmp/${sqlDump}",
+  }
+  file { "/tmp/${tarball}" :
+    ensure => file,
+    mode   => 644,
+    source => "puppet:///modules/carp_content/tmp/${tarball}"
+  }
+  exec { "untarModules":
+    command => "/bin/tar --strip-components=1 -C /usr/share/drupal6/ -xzvf /tmp/${tarball}",
+    cwd     => "/tmp",
+    require => File[ "/tmp/${tarball}" ]
 
   }
 }
