@@ -41,7 +41,7 @@ config.vm.synced_folder ".", "/vagrant", :extra => "dmode=755,fmode=755"
   #   vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-     vb.customize ["modifyvm", :id, "--memory", "1024"]
+     vb.customize ["modifyvm", :id, "--memory", "512"]
    end
   #
   # View the documentation for the provider you're using for more
