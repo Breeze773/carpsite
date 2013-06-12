@@ -31,6 +31,8 @@ $sqlDump = "sqloutput-06-12-2013.sql.gz"
   file { "/usr/share/drupal6/sites/default/dbconfig.php":
     ensure  => present,
     mode    => 644,
+    owner   => "root",
+    group   => "root",
     require => Exec[ "untarModules" ]
 
   }
@@ -42,7 +44,7 @@ $sqlDump = "sqloutput-06-12-2013.sql.gz"
   }
   file { "/usr/share/drupal6/":
     ensure  => directory,
-    owner   => "root",
+    owner   => "www-data",
     group   => "root",
     recurse => "true",
     require => Exec[ "untarModules" ]
